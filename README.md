@@ -32,7 +32,7 @@ Porém se a abelha tocar nos espinhos, o jogador perde uma vida e o nível reini
 
 ### UI
 
-![UI](ui.png)
+![UI](ui.jpg)
 
 ### Pacotes
 
