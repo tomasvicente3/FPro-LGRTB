@@ -47,4 +47,4 @@ Porém se a abelha tocar nos espinhos, o jogador perde uma vida e o nível reini
 5. pontuar o jogador com base no tempo e flores, limitando as vidas
 6. adicionar um menu inicial e sequência de "game over", com possível tabela de "high-scores"
 
-- Atualizado a última vez em 14/12/2021
+- Atualizado a última vez em 30/12/2021
