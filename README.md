@@ -40,10 +40,11 @@ Porém se a abelha tocar nos espinhos, o jogador perde uma vida e o nível reini
 
 ### Tarefas
 
-1. agrupar as imagens, prontas a usar 
-2. criar o ecrã
-3. construir os controlos da abelha
+1. agrupar as imagens, prontas a usar (concluído)
+2. criar o ecrã (HUD)
+3. construir os controlos da abelha (concluído)
 4. criar um conjunto de níveis/um gerador de cenário infinito (por decidir)
 5. pontuar o jogador com base no tempo e flores, limitando as vidas
+6. adicionar um menu inicial e sequência de "game over", com possível tabela de "high-scores"
 
 - Atualizado a última vez em 14/12/2021
