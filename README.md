@@ -30,6 +30,12 @@
 Para coletar as flores basta encostar à mesma, com a abelha que o jogador controla. 
 Porém se a abelha tocar nos espinhos, o jogador perde uma vida e o nível reinicia---*
 
+### Intruções de Jogo
+
+*---Nos menus, para navegação pode-se usar as setas ou, como alternativa, as teclas wasd, em conjunto com o Enter e o Escape.
+Em jogo, as setas para a esquerda e para a direita, assim como as teclas A e D fazem com que a abelha se mova para a esquerda e para a direita, respetivamente.
+Adicionalmente, a seta para cima ou a tecla W faz com que a abelha voe e suba.---*
+
 ### UI
 
 ![UI](ui.jpg)
@@ -43,8 +49,8 @@ Porém se a abelha tocar nos espinhos, o jogador perde uma vida e o nível reini
 1. agrupar as imagens, prontas a usar (concluído)
 2. criar o ecrã (HUD) (concluído)
 3. construir os controlos da abelha (concluído)
-4. criar um conjunto de níveis
+4. criar um conjunto de níveis (concluído)
 5. pontuar o jogador com base no tempo e flores, limitando as vidas (concluído)
-6. adicionar um menu inicial e sequência de "game over", com possível tabela de "high-scores"
+6. adicionar um menu inicial e sequência de "game over", com tabela de "high-scores" (concluído)
 
-- Atualizado a última vez em 11/01/2022
+- Atualizado a última vez em 22/01/2022
