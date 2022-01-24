@@ -27,7 +27,6 @@ menu = "main_menu"
 fonte = pg.font.Font("pricedow.ttf", 40)
 
 #níveis
-#1
 level_layouts = [[
     "XxxxXxxxXxxxXxxxXxxxXxxxXxxxXxxxXxxxXxxx",
     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -212,7 +211,7 @@ time = time_level+1 #segundos
 time_var = 0
 
 left_key = right_key = up_key = down_key = enter_key = escape_key = False
-in_leaf = False
+in_leaf = Freeze = False
 clock = pg.time.Clock()
 
 #contagem tempo
@@ -363,8 +362,12 @@ while running:
                 bee_x, bee_y = bee_start_level
                 time_level = time_levels[level-1]
                 time = time_level + 3
+                lives = 3
                 menu = "game"
+                freeze = True
                 next_level(level)
+                reset_level()
+                freeze = False
             elif menu_button == 1:
                 enter_key = False
                 menu = "highscore"
@@ -377,7 +380,7 @@ while running:
             menu_button = (menu_button - 1) % 3
             up_key = False
         elif down_key:
-            menu_button = (menu_button +1) % 3
+            menu_button = (menu_button + 1) % 3
             down_key = False
 
     if menu == "highscore" or menu == "game_over":
@@ -389,21 +392,21 @@ while running:
         sorted_hs = sorted(load_hs().items(), key=itemgetter(1), reverse=True)
 
     if menu == "game":
-        if alive:
+        if alive and not freeze:
             if up_key:
-                bee_vy = -0.2
+                bee_vy = -0.15
                 bee_state = (bee_state+1)%(2*k)
                 in_leaf = False
             elif not in_leaf:
-                bee_vy = 0.2
+                bee_vy = 0.15
                 bee_state = 0
 
             if left_key:
-                bee_vx = -0.2
+                bee_vx = -0.15
                 if bee_angle < 24:
                     bee_angle += 3
             elif right_key:
-                bee_vx = 0.2
+                bee_vx = 0.15
                 if bee_angle > -24:
                     bee_angle -= 3
             else:
@@ -421,12 +424,6 @@ while running:
         bee_oldy = bee_y
         bee_x += bee_vx*dt
         bee_y += bee_vy*dt
-
-        if bee_x < 0: #limites verticais do ecrã
-            bee_x = 0
-        elif bee_x > screen_size[0]-bee_size:
-            bee_x = screen_size[0]-bee_size
-
 
         #interações
         in_leaf = False
@@ -454,24 +451,17 @@ while running:
                         if bee_x < (col+1) * grid and bee_oldx >= (col+1) * grid and bee_vx < 0:
                             bee_vx = 0
                             bee_x = (col+1) * grid
-
                 #apanhar flores
                 if level_layout[row][col] == 'F':
                     if col*grid-bee_size < bee_x < (col+1)*grid and row*grid-bee_size < bee_y < row*grid and alive:
                         level_layout[row] = level_layout[row][:col] + "C" + level_layout[row][col+1:]
                         score_temp += 20
-
                 #espinhos
                 if level_layout[row][col] in "Xx":
                     if col*grid-bee_size < bee_x < (col+1)*grid and row*grid-bee_size < bee_y < (row+1)*grid:
                         bee_vy = -0.01
                         alive = False
 
-        #correção inclinação na folha
-#        if in_leaf:
-#            var = abs(32-32*math.sin(math.radians(bee_angle)))
-#            print(var)
-#            bee_y -= var
 
         #sequencia de respawn
         if not alive:
@@ -500,8 +490,8 @@ while running:
         #game over por vidas
         if lives == 0:
             dict_hs = load_hs()
-            if dict_hs.get("Player") < score:
-                dict_hs["Player"] = score
+            if dict_hs.get("You", 0) <= score:
+                dict_hs["You"] = score
                 save_hs(dict_hs)
             game_over("Game Over")
             menu = "game_over"
@@ -526,13 +516,15 @@ while running:
                 bee_x, bee_y = bee_start_level
                 time_level = time_levels[level-1]
                 time = time_level + 4
+                freeze = True
                 next_level(level)
                 reset_level()
+                freeze = False
             else:
                 score += 50*lives
                 dict_hs = load_hs()
-                if dict_hs.get("Player", 0) < score:
-                    dict_hs["Player"] = score
+                if dict_hs.get("You", 0) < score:
+                    dict_hs["You"] = score
                     save_hs(dict_hs)
                 game_over("Great Job!")
                 menu = "game_over"
@@ -566,7 +558,7 @@ while running:
                 elif level_layout[row][col] == 'X':
                     screen.blit(spikes, (col*grid, row*grid))
 
-        #abelha :D
+        #abelha
         bee_rot = rot_center(bee[bee_state], bee_angle)[0]
         bee_rot.set_colorkey((255, 0, 255))
         screen.blit(bee_rot, (bee_x, bee_y))
@@ -589,12 +581,13 @@ while running:
         screen.blit(menu_buttons[menu_button][0], (screen_size[0]/2-122, screen_size[1]/2+64))
         screen.blit(menu_buttons[menu_button][1], (screen_size[0]/2-128, screen_size[1]/2+128))
         screen.blit(menu_buttons[menu_button][2], (screen_size[0]/2-128, screen_size[1]/2+192))
-    elif menu == "game_over": #gameover
+
+    elif menu == "game_over":
         sorted_hs = sorted(load_hs().items(), key=itemgetter(1), reverse=True)
         screen.blit(pg.transform.scale2x(render("Highscore", fonte)), (screen_size[0]/2-160, 64))
         screen.blit(exit_sel, (screen_size[0]-128, screen_size[1]-64))
         for i in range(10):
-            if sorted_hs[i][0] == "Player":
+            if sorted_hs[i][0] == "You":
                 color_num = (color_num + 1) % (2*q)
                 screen.blit(render(str(sorted_hs[i][0]), fonte, color[color_num]), (180, 224+32*i))
                 screen.blit(render(str(sorted_hs[i][1]), fonte, color[color_num]), (screen_size[0]-256, 224+32*i))
@@ -613,5 +606,4 @@ while running:
                 break
 
     pg.display.flip()
-
 pg.quit()
