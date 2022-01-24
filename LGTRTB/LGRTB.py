@@ -365,8 +365,8 @@ while running:
                 lives = 3
                 menu = "game"
                 freeze = True
-                next_level(level)
                 reset_level()
+                next_level(level)
                 freeze = False
             elif menu_button == 1:
                 enter_key = False
@@ -424,6 +424,11 @@ while running:
         bee_oldy = bee_y
         bee_x += bee_vx*dt
         bee_y += bee_vy*dt
+
+        if bee_x < 0:
+            bee_x = 0
+        elif bee_x + 64 > screen_size[0]:
+            bee_x = screen_size[0] - 64
 
         #interações
         in_leaf = False
