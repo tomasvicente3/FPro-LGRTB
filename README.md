@@ -8,7 +8,7 @@
 1. Criar um clone do minijogo "Let's Get Ready To Bumble" (do Grand Theft Auto - San Andreas, da Rockstar Games) em Pygame
 
 2. Em alternativa, o clássico o Zuma da PopCap Games em Pygame.
-
+<!--
 ### Repositório de código
 
 1) Link para o repositório do GitHub: https://github.com/tomasvicente3/FPro-Project
@@ -23,7 +23,7 @@
 - https://github.com/pbv
 - https://github.com/imdcode
 - https://github.com/acoelho-fe-up-pt
-
+-->
 ### Descrição
 
 *---É um jogo de plataforma em que o objetivo do jogo é coletar flores em plataformas flutuantes, passando de nível quando não houver mais flores para coletar. 
@@ -53,4 +53,4 @@ Adicionalmente, a seta para cima ou a tecla W faz com que a abelha voe e suba.--
 5. pontuar o jogador com base no tempo e flores, limitando as vidas (concluído)
 6. adicionar um menu inicial e sequência de "game over", com tabela de "high-scores" (concluído)
 
-- Atualizado a última vez em 22/01/2022
+- Atualizado a última vez em 22/01/2024
